@@ -18,7 +18,11 @@ public class UserService {
     public User findById(final Long userId) {
         return userRepository.findById(userId).orElseThrow(()->new NoSuchElementException());
         }
+
+    public User save(final User user) {
+        return userRepository.save(user);
     }
+}
 
 
 

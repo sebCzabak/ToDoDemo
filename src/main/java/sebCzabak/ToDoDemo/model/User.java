@@ -14,15 +14,23 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
+    @Column(name = "email")
+    private String email;
 
     @OneToMany
     private List<Task> taskList =new ArrayList<>();
 
+    public User(final String username, final String password, final String email, final List<Task> taskList) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.taskList = taskList;
+    }
 }

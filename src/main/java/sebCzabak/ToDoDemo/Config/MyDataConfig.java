@@ -27,13 +27,12 @@ public class MyDataConfig implements CommandLineRunner {
     @Override
     public void run(final String... args) throws Exception {
         User user0 = new User(
-                1L,
                 "TestName0",
                 "1234",
+                "test@example.com",
                 new ArrayList<>()
         );
         Task task0 = new Task(
-                1L,
                 "Model Testing0",
                 false,
                 LocalDate.of(2022, Month.MARCH, 15),
