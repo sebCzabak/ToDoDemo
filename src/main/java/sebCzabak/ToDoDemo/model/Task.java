@@ -14,26 +14,33 @@ import java.time.Period;
 @Data
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "description")
     private String description;
     @Column(name = "done")
-    private boolean done;
+    private boolean done = Boolean.FALSE;
     @Column(name = "dateCreated")
     private LocalDate dateCrated;
     @Transient
     private Integer calcDate;
 
-    public Integer getCalcDate() {
-        return Period.between(this.dateCrated,LocalDate.now()).getDays();
-    }
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private Task tasks;
 
-    public Task(final String description, final boolean done, final LocalDate dateCrated, final Integer calcDate) {
+    public Task(final String description, final boolean done, final LocalDate dateCrated) {
         this.description = description;
         this.done = done;
         this.dateCrated = dateCrated;
-        this.calcDate = calcDate;
+
     }
+
+
+//    public Integer getCalcDate() {
+//        return Period.between(this.dateCrated,LocalDate.now()).getDays();
+//    }
+
+
 }

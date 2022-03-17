@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "username")
@@ -24,8 +24,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany
-    private List<Task> taskList =new ArrayList<>();
+
+    @OneToMany(targetEntity = Task.class,cascade = CascadeType.ALL)
+    private List<Task> taskList = new ArrayList<>();
 
     public User(final String username, final String password, final String email, final List<Task> taskList) {
         this.username = username;

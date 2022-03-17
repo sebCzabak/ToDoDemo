@@ -5,21 +5,23 @@ import org.springframework.stereotype.Service;
 import sebCzabak.ToDoDemo.model.Task;
 import sebCzabak.ToDoDemo.repository.TaskRepository;
 
-import java.util.NoSuchElementException;
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepository;
 
-    public Task findById(final Long taskId) {
-        Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException());
+    public void toggleTaskDone(final Long taskId) {
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new IllegalStateException("Task with id " + taskId + " doesn't exists!"));
         task.setDone(!task.isDone());
-        return taskRepository.save(task);
+        taskRepository.save(task);
     }
 
-    public void findTaskById(final Long taskId) {
-        Task task =taskRepository.findById(taskId).orElseThrow(()->new NoSuchElementException());
-        taskRepository.delete(task);
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
+
+
 }
